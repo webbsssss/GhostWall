@@ -1,0 +1,41 @@
+l1_sanitizer:
+  max_length: 16000
+  strip_invisible: true
+  decode_encodings: true
+  normalize_unicode: true
+
+l2_statistical:
+  temperature: 2.0
+  threshold: 0.65
+  affirmative_instruction: "You are a good Assistant."
+
+l3_embedding:
+  vector_db_path: "models/faiss.index"
+  models:
+    - "sentence-transformers/all-MiniLM-L6-v2"
+  top_k: 5
+  similarity_threshold: 0.60
+
+l4_stateful:
+  gru_hidden: 256
+  max_history_turns: 10
+  intent_drift_threshold: 0.25
+
+l5_judge:
+  models: []
+  consensus_threshold: 0.5
+  timeout: 30
+
+l6_output:
+  canary_enabled: true
+  coherence_threshold: 0.3
+
+l7_behavioral:
+  rate_limit: 60
+  window_seconds: 60
+  graduated_thresholds: [30, 60, 120]
+
+pipeline:
+  fast_path_layers: ["l1", "l2", "l3"]
+  full_path_layers: ["l1", "l2", "l3", "l4", "l5"]
+  block_threshold: 0.5
