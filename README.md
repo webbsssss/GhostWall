@@ -111,7 +111,3 @@ demo.py           # quick demo
 ```bash
 pytest tests/
 ```
-
-## License
-
-MIT
